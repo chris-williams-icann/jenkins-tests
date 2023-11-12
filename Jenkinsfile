@@ -21,6 +21,8 @@ pipeline {
                     def sortedFiles = zip_files.sort { a, b ->
                         long aLastModified = a.getLastModified()
                         long bLastModified = b.getLastModified()
+                        println "aLastModified: ${aLastModified} a: ${a}"
+                        println "bLastModified: ${bLastModified} a: ${b}"
                     
                         // Compare last modified dates in descending order
                         bLastModified <=> aLastModified
