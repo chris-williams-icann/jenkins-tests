@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Getting files from repo'
                 checkout scm
-                sh 'ls -lt'
+                sh 'stat packages/*/*.zip'
                 script {
                     log.info('Howdy, partner')
                     def file_select = 'packages/*/*.zip'
