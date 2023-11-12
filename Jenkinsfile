@@ -9,7 +9,7 @@ pipeline {
                 sh 'ls -lt'
                 script {
                     log.info('Howdy, partner')
-                    def file_select = '*.md'
+                    def file_select = '\\*.md'
                     def text_files = fileUtils.getZipFiles(file_select)
                     println "${text_files}"
                 }
