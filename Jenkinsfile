@@ -6,11 +6,11 @@ pipeline {
             steps {
                 echo 'Getting files from repo'
                 checkout scm
-                sh 'echo "Hello world"'
+                sh 'ls -lt'
                 script {
                     log.info('Howdy, partner')
-                    def file_select = '**/*'
-                    def text_files = fileUtils.getZipFiles(file_select)
+                    def file_select = '*.md'
+                    def text_files = fileUtils.getFilesMatchingPattern(file_select)
                     println "${text_files}"
                 }
                 // Add your build steps here
