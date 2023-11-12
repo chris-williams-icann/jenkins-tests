@@ -28,6 +28,7 @@ pipeline {
                         bLastModified <=> aLastModified
                     }
                     println "sortedFiles: ${sortedFiles}"
+                    println "After zip_files: ${zip_files}"
                 }
                 // Add your build steps here
             }
