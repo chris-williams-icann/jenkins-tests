@@ -1,2 +1,10 @@
 # jenkins-tests
-Repo for testing groovy and the Jenkins pipeline
+
+This is a Jenkins Groovy project with local libraries.
+
+### Project Structure
+
+- `src/`: Contains the Groovy scripts.
+- `libs/`: Placeholder for local libraries.
+- `Jenkinsfile`: Jenkins pipeline script.
+
