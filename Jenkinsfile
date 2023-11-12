@@ -9,9 +9,11 @@ pipeline {
                 sh 'ls -lt'
                 script {
                     log.info('Howdy, partner')
-                    def file_select = '*.md'
-                    def text_files = fileUtils.getFilesMatchingPattern(file_select)
-                    println "${text_files}"
+                    def file_select = 'packages/*/*.zip'
+                    def zip_files = fileUtils.getFilesMatchingPattern(file_select)
+                    println "zip_files: ${zip_files}"
+                    def sorted_files = fileUtils.sortFilesByLastModified(zip_files)
+                    println "sorted_files: ${sorted_files}"
                 }
                 // Add your build steps here
             }
