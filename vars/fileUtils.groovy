@@ -9,8 +9,8 @@ def getFilesMatchingPattern(globPattern) {
 
 def sortFilesByLastModified(files) {
     files.sort { a, b ->
-        def aModified = a.lastModified()
-        def bModified = b.lastModified()
+        def aModified = a.getLastModified()
+        def bModified = b.getLastModified()
         return bModified <=> aModified
     }
 }
