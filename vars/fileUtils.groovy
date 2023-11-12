@@ -13,6 +13,7 @@ def sortFilesByLastModified(files) {
         def bModified = b.getLastModified()
         return bModified <=> aModified
     }
+    return files
 }
 
 def getZipFiles(antExpression) {
