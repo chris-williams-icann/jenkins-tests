@@ -21,12 +21,12 @@ def getLastModified(fileObjs) {
     if (!fileObjs instanceof File[]) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
-    def lastMod = new File('')
+    // def lastMod = new File('')
     for (file in fileObjs) {
-        if (lastMod == null || file.lastModified() > lastMod.lastModified()) {
+        if (lastMod == null || file.lastModified > lastMod.lastModified {
             println "file type: ${file.class} lastMod type: ${lastMod.class}"
-            lastMod = file
-            println "file: ${file} is more recent"
+            // lastMod = file
+            println "file: ${file} is more recent ${file.lastModified}"
         } else {
             println "file: ${file} is NOT more recent"
         }
@@ -55,8 +55,8 @@ def sortFilesByLastModified(paths) {
 
     // Sort files by last modified date
     def sortedFiles = fileObjects.sort { a, b ->
-        long aLastModified = a.lastModified()
-        long bLastModified = b.lastModified()
+        long aLastModified = a.lastModified
+        long bLastModified = b.lastModified
 
         // Compare last modified dates in descending order
         bLastModified <=> aLastModified
@@ -73,8 +73,8 @@ def sortFilesObjsByLastModified(fileObjs) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
     def sortedFiles = fileObjs.sort { a, b ->
-        def aModified = a.getLastModified()
-        def bModified = b.getLastModified()
+        def aModified = a.lastModified
+        def bModified = b.lastModified
         println "a: ${a} aModified=${aModified}"
         println "b: ${b} bModified=${bModified}"
         return bModified <=> aModified
