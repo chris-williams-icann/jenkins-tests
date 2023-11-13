@@ -2,25 +2,6 @@
 
 import java.io.File
 
-def sortFilesByLastModified(files) {
-    // Convert file paths to File objects
-    def fileObjects = files.collect { new File(it) }
-
-    // Sort files by last modified date
-    def sortedFiles = fileObjects.sort { a, b ->
-        long aLastModified = a.lastModified()
-        long bLastModified = b.lastModified()
-
-        // Compare last modified dates in descending order
-        bLastModified <=> aLastModified
-    }
-
-    // Convert File objects back to file paths
-    def sortedFilePaths = sortedFiles.collect { it.toString() }
-
-    return sortedFilePaths
-}
-
 pipeline {
     agent any
     stages {
