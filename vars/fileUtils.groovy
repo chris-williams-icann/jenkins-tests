@@ -22,11 +22,14 @@ def getLastModified(fileObjs) {
     if (!fileObjs instanceof File[]) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
-    def lastMod = new FileWrapper()
+    if (fileObjs.isEmpty()) {
+        return null
+    }
+    def lastMod = fileObjs[0]
     for (file in fileObjs) {
         println "file type: ${file.class}"
         println "file: ${file} lastModified${file.lastModified}"
-        if (lastMod == null || lastMod.filePath.isEmpty() || file.lastModified > lastMod.lastModified) {
+        if (file.lastModified > lastMod.lastModified) {
             println "file type: ${file.class} lastMod type: ${lastMod.class}"
             lastMod = file
             println "file: ${file} is more recent ${file.lastModified}"
