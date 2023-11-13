@@ -21,7 +21,7 @@ def getLastModified(fileObjs) {
     if (!fileObjs instanceof File[]) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
-    def lastMod new File()
+    def lastMod = new File('')
     for (file in fileObjs) {
         if (lastMod == null || file.lastModified() > lastMod.lastModified()) {
             println "file type: ${file.class} lastMod type: ${lastMod.class}"
