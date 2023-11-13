@@ -4,11 +4,17 @@ import java.io.File
 
 pipeline {
     agent any
+    environment {
+        GIT_BRANCH = ''
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Getting files from repo'
                 checkout scm
+                // Get the list of changed files
+                def changedFiles = sh(script: "git diff --name-only origin/$GIT_BRANCH", returnStdout: true).trim()
+                echo "Changed files: ${changedFiles}"
                 sh 'touch -m -240000 packages/P001/abc.zip'
                 sh 'touch -m -240000 packages/P002/jkl.zip'
                 sh 'stat packages/*/*.zip'
