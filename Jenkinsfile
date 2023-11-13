@@ -19,8 +19,6 @@ pipeline {
                     println "zip_files: ${zip_files}"
                     def new_sort = fileUtils.sortFilesObjsByLastModified(zip_files)
                     println "new_sort: ${new_sort}"
-                    def sorted_files = fileUtils.sortFilesByLastModified(zip_files)
-                    println "sorted_files: ${sorted_files}"
                     // Sort files by last modified date
                     def sortedFiles = zip_files.sort{-it.getLastModified()}
                     zip_files.sort{a, b -> b.getLastModified() <=> a.getLastModified()}
