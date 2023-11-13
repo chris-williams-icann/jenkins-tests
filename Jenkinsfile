@@ -1,5 +1,24 @@
 @Library('chris-test-shared-lib') _
 
+def sortFilesByLastModified(files) {
+    // Convert file paths to File objects
+    def fileObjects = files.collect { new File(it) }
+
+    // Sort files by last modified date
+    def sortedFiles = fileObjects.sort { a, b ->
+        long aLastModified = a.lastModified()
+        long bLastModified = b.lastModified()
+
+        // Compare last modified dates in descending order
+        bLastModified <=> aLastModified
+    }
+
+    // Convert File objects back to file paths
+    def sortedFilePaths = sortedFiles.collect { it.toString() }
+
+    return sortedFilePaths
+}
+
 pipeline {
     agent any
     stages {
@@ -15,6 +34,8 @@ pipeline {
                     def file_select = 'packages/*/*.zip'
                     def zip_files = fileUtils.getFilesMatchingPattern(file_select)
                     println "zip_files: ${zip_files}"
+                    def new_sort = sortFilesByLastModified(zip_files)
+                    println "new_sort: ${new_sort}"
                     def sorted_files = fileUtils.sortFilesByLastModified(zip_files)
                     println "sorted_files: ${sorted_files}"
                     // Sort files by last modified date
