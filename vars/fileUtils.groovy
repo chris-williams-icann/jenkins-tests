@@ -1,6 +1,7 @@
 package org.christest
 
 import java.io.File
+import org.jenkinsci.plugins.pipeline.utility.steps
 
 def getFilesMatchingPattern(globPattern) {
     def files = findFiles(glob: globPattern)
@@ -21,19 +22,17 @@ def getLastModified(fileObjs) {
     if (!fileObjs instanceof File[]) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
-    // def lastMod = new File('')
+    def lastMod = new FileWrapper()
     for (file in fileObjs) {
         println "file type: ${file.class}"
         println "file: ${file} lastModified${file.lastModified}"
-        /*
-        if (lastMod == null || file.lastModified > lastMod.lastModified) {
+        if (lastMod == null || lastMod.filePath.isEmpty() || file.lastModified > lastMod.lastModified) {
             println "file type: ${file.class} lastMod type: ${lastMod.class}"
-            // lastMod = file
+            lastMod = file
             println "file: ${file} is more recent ${file.lastModified}"
         } else {
             println "file: ${file} is NOT more recent"
         }
-        */
     }
     println "most recent file is : ${lastMod}"
     return lastMod
