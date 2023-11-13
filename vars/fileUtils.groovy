@@ -1,4 +1,4 @@
-package org.christest
+urn package org.christest
 
 import java.io.File
 
@@ -8,12 +8,14 @@ def getFilesMatchingPattern(globPattern) {
 }
 
 def sortFilesByLastModified(files) {
-    files.sort { a, b ->
+    def sortedFiles = files.sort { a, b ->
         def aModified = a.getLastModified()
         def bModified = b.getLastModified()
+        println "a: ${a} aModified=${aModified}"
+        println "b: ${b} bModified=${bModified}"
         return bModified <=> aModified
     }
-    return files
+    return sortedFiles
 }
 
 def getZipFiles(antExpression) {
