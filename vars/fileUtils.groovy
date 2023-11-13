@@ -23,7 +23,7 @@ def getLastModified(fileObjs) {
     }
     File lastMod
     for (file in fileObjs) {
-        if (!lastMod or file.lastModified() > lastMod.lastModified()) {
+        if (!lastMod || file.lastModified() > lastMod.lastModified()) {
             lastMod = file
             println "file: ${file} is more recent"
         } else {
