@@ -17,6 +17,23 @@ def fileObjsToPaths(fileObjs) {
     return result
 }
 
+def getLastModified(fileObjs) {
+    if (!fileObjs instanceof File[]) {
+        throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
+    }
+    File lastMod
+    for (file in fileObjs) {
+        if (!lastMod or file.lastModified() > lastMod.lastModified()) {
+            lastMod = file
+            println "file: ${file} is more recent"
+        } else {
+            println "file: ${file} is NOT more recent"
+        }
+    }
+    println "most recent file is : ${lastMod}"
+    return lastMod
+}
+
 def pathsToFileObjects(paths) {
     if (!paths instanceof String[]) {
         throw new IllegalArgumentException("The paths parameter must be an array of strings")
