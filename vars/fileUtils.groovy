@@ -7,6 +7,16 @@ def getFilesMatchingPattern(globPattern) {
     return files
 }
 
+getFileObjPaths(fileObjs) {
+    def result = []
+    def wrap = findFiles(glob: '*')
+    wrap.each { it, i ->
+      def full_path = it.getPath()
+      result.add(full_path)
+    }
+    return result
+}
+
 def sortFilesByLastModified(files) {
     // Convert file paths to File objects
     def fileObjects = files.collect { new File(it) }
@@ -26,8 +36,8 @@ def sortFilesByLastModified(files) {
     return sortedFilePaths
 }
 
-def sortFilesObjsByLastModified(files) {
-    def sortedFiles = files.sort { a, b ->
+def sortFilesObjsByLastModified(fileObjs) {
+    def sortedFiles = fileObjs.sort { a, b ->
         def aModified = a.getLastModified()
         def bModified = b.getLastModified()
         println "a: ${a} aModified=${aModified}"
