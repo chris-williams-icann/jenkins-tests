@@ -1,4 +1,4 @@
-l@Library('chris-test-shared-lib') _
+@Library('chris-test-shared-lib') _
 
 import java.io.File
 
