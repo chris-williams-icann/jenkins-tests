@@ -7,7 +7,7 @@ def getFilesMatchingPattern(globPattern) {
     return files
 }
 
-getFileObjPaths(fileObjs) {
+def fileObjsToPaths(fileObjs) {
     def result = []
     def wrap = findFiles(glob: '*')
     wrap.each { it, i ->
@@ -17,9 +17,23 @@ getFileObjPaths(fileObjs) {
     return result
 }
 
-def sortFilesByLastModified(files) {
+def pathsToFileObjects(paths) {
+    if (!paths instanceof String[]) {
+        throw new IllegalArgumentException("The paths parameter must be an array of strings")
+    }
+    def fileObjects = [] as List<File>
+    for (path in paths) {
+        fileObjects << new File(path)
+    }
+    return fileObjects
+}
+
+def sortFilesByLastModified(paths) {
+    if (!paths instanceof String[]) {
+        throw new IllegalArgumentException("The paths parameter must be an array of strings")
+    }
     // Convert file paths to File objects
-    def fileObjects = files.collect { new File(it) }
+    def fileObjects = paths.collect { new File(it) }
 
     // Sort files by last modified date
     def sortedFiles = fileObjects.sort { a, b ->
@@ -37,6 +51,9 @@ def sortFilesByLastModified(files) {
 }
 
 def sortFilesObjsByLastModified(fileObjs) {
+    if (!fileObjs instanceof File[]) {
+        throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
+    }
     def sortedFiles = fileObjs.sort { a, b ->
         def aModified = a.getLastModified()
         def bModified = b.getLastModified()
