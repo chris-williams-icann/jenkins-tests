@@ -22,7 +22,7 @@ def getLastModified(fileObjs) {
     if (!fileObjs instanceof File[]) {
         throw new IllegalArgumentException("The paths fileObjs must be an array of File objects")
     }
-    if (fileObjs.isEmpty()) {
+    if (fileObjs.size() < 1) {
         return null
     }
     def lastMod = fileObjs[0]
