@@ -1,7 +1,7 @@
 package org.christest
 
 import java.io.File
-import org.jenkinsci.plugins.pipeline.utility.steps
+import org.jenkinsci.plugins.pipeline.utility.steps.fs.FileWrapper
 
 def getFilesMatchingPattern(globPattern) {
     def files = findFiles(glob: globPattern)
