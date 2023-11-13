@@ -17,7 +17,7 @@ pipeline {
                     def file_select = 'packages/*/*.zip'
                     def zip_files = fileUtils.getFilesMatchingPattern(file_select)
                     println "zip_files: ${zip_files}"
-                    def new_sort = sortFilesByLastModified(zip_files)
+                    def new_sort = fileUtils.sortFilesByLastModified(zip_files)
                     println "new_sort: ${new_sort}"
                     def sorted_files = fileUtils.sortFilesByLastModified(zip_files)
                     println "sorted_files: ${sorted_files}"
