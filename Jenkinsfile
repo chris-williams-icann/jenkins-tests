@@ -1,4 +1,4 @@
-@Library('chris-test-shared-lib') _
+l@Library('chris-test-shared-lib') _
 
 import java.io.File
 
@@ -17,6 +17,8 @@ pipeline {
                     def file_select = 'packages/*/*.zip'
                     def zip_files = fileUtils.getFilesMatchingPattern(file_select)
                     println "zip_files: ${zip_files}"
+                    def last_mod = fileUtils.getLastModified(zip_files)
+                    println "last_mod: ${last_mod}"
                     def new_sort = fileUtils.sortFilesObjsByLastModified(zip_files)
                     println "new_sort: ${new_sort}"
                     // Sort files by last modified date
