@@ -1,5 +1,7 @@
 @Library('chris-test-shared-lib') _
 
+import java.io.File
+
 def sortFilesByLastModified(files) {
     // Convert file paths to File objects
     def fileObjects = files.collect { new File(it) }
