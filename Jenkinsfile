@@ -18,15 +18,7 @@ pipeline {
                     def sorted_files = fileUtils.sortFilesByLastModified(zip_files)
                     println "sorted_files: ${sorted_files}"
                     // Sort files by last modified date
-                    def sortedFiles = zip_files.sort { a, b ->
-                        long aLastModified = a.getLastModified()
-                        long bLastModified = b.getLastModified()
-                        println "aLastModified: ${aLastModified} a: ${a}"
-                        println "bLastModified: ${bLastModified} a: ${b}"
-                    
-                        // Compare last modified dates in descending order
-                        bLastModified <=> aLastModified
-                    }
+                    def sortedFiles = zip_files.sort { it.getLastModified() }
                     println "sortedFiles: ${sortedFiles}"
                     println "After zip_files: ${zip_files}"
                 }
