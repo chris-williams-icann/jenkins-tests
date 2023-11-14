@@ -15,7 +15,7 @@ pipeline {
                 checkout scm
                 script {
                     // Get the list of changed files
-                    def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim()
+                    def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim().split('\n')
                     echo "Changed files: ${changedFiles}"
                 }
                 sh 'touch -a -m -t 202311091300 packages/P001/abc.zip'

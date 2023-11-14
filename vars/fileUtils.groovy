@@ -1,4 +1,4 @@
-urn package org.christest
+package org.christest
 
 import java.io.File
 
