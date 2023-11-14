@@ -3,6 +3,30 @@ package org.christest
 import java.io.File
 import org.jenkinsci.plugins.pipeline.utility.steps.fs.FileWrapper
 
+def gitDiffAndFilterSortFiles(pattern) {
+    // Step 1: Get the list of changed files using git diff
+    def gitDiffCommand = 'git diff --name-only'
+    def changedFiles = sh(script: gitDiffCommand, returnStdout: true).trim().split('\n')
+
+    // Step 2: Filter files based on the provided pattern
+    def filteredFiles = changedFiles.findAll { file ->
+        file =~ pattern
+    }
+
+    // Step 3: Sort the filtered files by file name in descending order
+    def sortedFiles = filteredFiles.sort { a, b ->
+        b <=> a
+    }
+
+    // Step 4: Print the sorted file names (for demonstration purposes)
+    sortedFiles.each { file ->
+        echo "Sorted File: ${file}"
+    }
+
+    // Return the sorted file list (optional)
+    return sortedFiles
+}
+
 def getFilesMatchingPattern(globPattern) {
     def files = findFiles(glob: globPattern)
     return files
@@ -27,17 +51,10 @@ def getLastModified(fileObjs) {
     }
     def lastMod = fileObjs[0]
     for (file in fileObjs) {
-        println "file type: ${file.class}"
-        println "file: ${file} lastModified${file.lastModified}"
         if (file.lastModified > lastMod.lastModified) {
-            println "file type: ${file.class} lastMod type: ${lastMod.class}"
             lastMod = file
-            println "file: ${file} is more recent ${file.lastModified}"
-        } else {
-            println "file: ${file} is NOT more recent"
         }
     }
-    println "most recent file is : ${lastMod}"
     return lastMod
 }
 
