@@ -14,11 +14,6 @@ pipeline {
                 echo 'Getting files from repo'
                 checkout scm
                 script {
-                    // Get the list of changed files
-                    def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim().split('\n')
-                    echo "Changed files: ${changedFiles}"
-                }
-                script {
                     def updatedPackages = fileUtils.gitDiffAndFilterSortFiles('packages/*/*.zip')
                     echo "Updated Packages: ${updatedPackages}"     
                 }

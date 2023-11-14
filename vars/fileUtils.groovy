@@ -4,23 +4,24 @@ import java.io.File
 import org.jenkinsci.plugins.pipeline.utility.steps.fs.FileWrapper
 
 def gitDiffAndFilterSortFiles(pattern) {
-    // Step 1: Get the list of changed files using git diff
+    println "Getting the list of changed files"
     def gitDiffCommand = 'git diff --name-only'
     def changedFiles = sh(script: gitDiffCommand, returnStdout: true).trim().split('\n')
 
-    // Step 2: Filter files based on the provided pattern
+    println "Filter files based on the provided pattern"
     def filteredFiles = changedFiles.findAll { file ->
         file =~ pattern
     }
+    println "Filtered files; ${filteredFiles}"
 
-    // Step 3: Sort the filtered files by file name in descending order
+    println "Sort the filtered files by file name in descending order"
     def sortedFiles = filteredFiles.sort { a, b ->
         b <=> a
     }
 
     // Step 4: Print the sorted file names (for demonstration purposes)
     sortedFiles.each { file ->
-        echo "Sorted File: ${file}"
+        println "Sorted File: ${file}"
     }
 
     // Return the sorted file list (optional)
