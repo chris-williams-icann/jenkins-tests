@@ -15,7 +15,7 @@ pipeline {
                 checkout scm
                 script {
                     // Get the list of changed files
-                    def changedFiles = sh(script: "git diff --name-only origin/${GIT_BRANCH}", returnStdout: true).trim()
+                    def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim()
                     echo "Changed files: ${changedFiles}"
                 }
                 sh 'touch -m -240000 packages/P001/abc.zip'
