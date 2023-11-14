@@ -4,9 +4,7 @@ import java.io.File
 
 pipeline {
     agent any
-    environment {
-        GIT_BRANCH = 'main'
-    }
+
     stages {
         stage('Build') {
             steps {
