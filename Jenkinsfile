@@ -18,8 +18,8 @@ pipeline {
                     def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim()
                     echo "Changed files: ${changedFiles}"
                 }
-                sh 'touch -m -240000 packages/P001/abc.zip'
-                sh 'touch -m -240000 packages/P002/jkl.zip'
+                sh 'touch -a -m -t 202311091300 packages/P001/abc.zip'
+                sh 'touch -a -m -t 202311081300  packages/P002/jkl.zip'
                 sh 'stat packages/*/*.zip'
                 script {
                     log.info('Howdy, partner')
