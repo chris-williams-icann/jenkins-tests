@@ -18,6 +18,10 @@ pipeline {
                     def changedFiles = sh(script: "git diff --name-only HEAD^ HEAD", returnStdout: true).trim().split('\n')
                     echo "Changed files: ${changedFiles}"
                 }
+                script {
+                    def updatedPackages = fileUtils.gitDiffAndFilterSortFiles('packages/*/*.zip')
+                    echo "Updated Packages: ${updatedPackages}"     
+                }
                 sh 'touch -a -m -t 202311091300 packages/P001/abc.zip'
                 sh 'touch -a -m -t 202311081300  packages/P002/jkl.zip'
                 sh 'stat packages/*/*.zip'
