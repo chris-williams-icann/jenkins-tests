@@ -11,7 +11,7 @@ def getChangedFiles() {
 }
 
 @NonCPS
-def gitDiffAndFilterSortFiles(pattern, changedFiles) {
+def filterAndSortFiles(pattern, changedFiles) {
 
     println "Filter files based on the provided pattern"
     def filteredFiles = changedFiles.findAll { file ->
