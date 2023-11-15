@@ -1,8 +1,8 @@
 package org.christest
 
 import java.io.File
-import org.jenkinsci.plugins.pipeline.utility.steps.fs.FileWrapper
 
+@NonCPS
 def gitDiffAndFilterSortFiles(pattern) {
     println "Getting the list of changed files"
     def gitDiffCommand = 'git diff --name-only HEAD^..HEAD'
