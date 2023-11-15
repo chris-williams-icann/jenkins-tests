@@ -7,6 +7,7 @@ def gitDiffAndFilterSortFiles(pattern) {
     println "Getting the list of changed files"
     def gitDiffCommand = 'git diff --name-only HEAD^..HEAD'
     def changedFiles = sh(script: gitDiffCommand, returnStdout: true).trim().split('\n')
+    println "Changed files; ${changedFiles}"
 
     println "Filter files based on the provided pattern"
     def filteredFiles = changedFiles.findAll { file ->
