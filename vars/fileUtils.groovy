@@ -2,12 +2,16 @@ package org.christest
 
 import java.io.File
 
-@NonCPS
-def gitDiffAndFilterSortFiles(pattern) {
+def getChangedFiles() {
     println "Getting the list of changed files"
     def gitDiffCommand = 'git diff --name-only HEAD^..HEAD'
     def changedFiles = sh(script: gitDiffCommand, returnStdout: true).trim().split('\n')
     println "Changed files; ${changedFiles}"
+    return changedFiles
+}
+
+@NonCPS
+def gitDiffAndFilterSortFiles(pattern, changedFiles) {
 
     println "Filter files based on the provided pattern"
     def filteredFiles = changedFiles.findAll { file ->
@@ -19,11 +23,7 @@ def gitDiffAndFilterSortFiles(pattern) {
     def sortedFiles = filteredFiles.sort { a, b ->
         b <=> a
     }
-
-    // Step 4: Print the sorted file names (for demonstration purposes)
-    sortedFiles.each { file ->
-        println "Sorted File: ${file}"
-    }
+    println "Sorted files; ${sortedFiles}"
 
     // Return the sorted file list (optional)
     return sortedFiles
