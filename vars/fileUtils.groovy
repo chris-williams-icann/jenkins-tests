@@ -5,7 +5,7 @@ import org.jenkinsci.plugins.pipeline.utility.steps.fs.FileWrapper
 
 def gitDiffAndFilterSortFiles(pattern) {
     println "Getting the list of changed files"
-    def gitDiffCommand = 'git diff --name-only'
+    def gitDiffCommand = 'git diff --name-only master'
     def changedFiles = sh(script: gitDiffCommand, returnStdout: true).trim().split('\n')
 
     println "Filter files based on the provided pattern"
